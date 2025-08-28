@@ -1,0 +1,10 @@
+{% extends "bootstrap.html" %}
+{% block main %}
+<ul>
+Lorem ipsum dolor sit, amet consectetur adipisicing elit. Fugiat quae enim consectetur excepturi sint tempore odio corrupti perspiciatis eius, nisi, in, impedit quisquam error expedita eos quas! Ullam ut fuga nesciunt inventore, nisi id harum ea maxime aperiam quasi possimus neque perferendis voluptas amet incidunt expedita praesentium magni doloribus consequatur modi quisquam esse nostrum veritatis! Fugiat maxime explicabo pariatur! Possimus in quidem provident blanditiis quo similique adipisci architecto, quos officiis exercitationem odio consequuntur veritatis deleniti nulla excepturi, soluta quaerat necessitatibus, maiores quae fuga voluptas cum reprehenderit labore. Autem illo nesciunt fuga atque perferendis voluptatum! Voluptatum a at ea esse non.
+    {% for user in users %}
+    <li>{{ user.username }}</li>
+    <a href="{% url 'user_id' user.id %}">details</a>
+    {% endfor %}
+</ul>
+{% endblock main %}

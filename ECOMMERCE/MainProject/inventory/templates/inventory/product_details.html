@@ -1,0 +1,15 @@
+{% extends 'bootstrap.html' %}
+
+{% block main %}
+
+<div>
+    <div>
+        <p>{{product.product_name}}</p>
+    </div>
+</div>
+<a href="{% url 'update_product' product.id %}" class="btn btn-warning">Update</a>
+<a href="{% url 'delete_product' product.id %}" class="btn btn-danger">Delete</a>
+<a href="{% url 'add_to_cart' product.id %}" class="btn btn-danger">add to cart</a>
+
+
+{% endblock %}

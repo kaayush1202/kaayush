@@ -1,0 +1,14 @@
+{% extends "bootstrap.html" %}
+
+{% block main %}
+
+<form action="/accounts/email_verify/" method = "POST">
+    {% csrf_token %}
+    <input type="number" name="otp" id="" min="1000" max="9999" required>
+<input type="submit" value="Verify">
+</form>
+
+{% endblock main%}
+
+
+

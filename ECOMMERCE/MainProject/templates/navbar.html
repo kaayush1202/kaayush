@@ -1,0 +1,49 @@
+     <nav style="background-color: #2c2c2c; padding: 10px 0;">
+  <div style="max-width: 1200px; margin: 0 auto; display: flex; align-items: center; justify-content: space-between;">
+    
+    <!-- Logo -->
+    <div style="font-size: 24px; color: #f44336; font-weight: bold;">
+      flat<span style="color: #999;">astic</span>
+    </div>
+
+    <!-- Navigation Links -->
+    <ul style="list-style: none; display: flex; margin: 0; padding: 0;">
+      <li style="margin: 0 15px;"><a href="/" style="color: #fff; text-decoration: none;">HOME</a></li>
+      <li style="margin: 0 15px;"><a href="{% url 'user_list' %}" style="color: #fff; text-decoration: none;">users</a></li>
+      <li style="margin: 0 15px;"><a href="#" style="color: #fff; text-decoration: none;">id</a></li>
+      <li style="margin: 0 15px;"><a href="{% url 'product_list' %}" style="color: #fff; text-decoration: none;">Products</a></li>
+    
+      {% if request.user.is_authenticated and request.user.user_type == "Supplier" %}
+      <li style="margin: 0 15px;"><a href="{% url 'create_product' %}" style="color: #fff; text-decoration: none;">Create Product</a></li>
+      {% endif %}
+      {% if request.user.is_authenticated and request.user.user_type == "Customer" %}
+      <li style="margin: 0 15px;"><a href="{% url 'show_address' %}" style="color: #fff; text-decoration: none;">address</a></li>
+      <li style="margin: 0 15px;"><a href="{% url 'add_address' %}" style="color: #fff; text-decoration: none;">add_address</a></li>
+      {% endif %}
+      
+      <li style="margin: 0 15px;"><a href="#" style="color: #fff; text-decoration: none;">CONTACT</a></li>
+    </ul>
+    <!-- Search and Cart -->
+    <div style="display: flex; align-items: center;">
+      <input type="text" placeholder="Search" style="padding: 5px; margin-right: 15px;">
+      <a href="{% url 'showcart'  %}">
+      <button style="background: #f44336; color: #fff; border: none; padding: 5px 10px;" >Cart</button>
+      </a>
+      {% if request.user.is_authenticated %}
+        <!-- Show logout button only when logged in -->
+        <form action="{% url 'logout' %}" method="post" style="margin-left: 10px;">
+          {% csrf_token %}
+          <button type="submit" style="background-color: red; color: white; border: none; padding: 5px 10px;">Logout</button>
+        </form>
+      {% else %}
+        <!-- Show login & signup buttons when not logged in -->
+        <a href="/accounts/register" style="text-decoration: none;">
+          <button style="background-color: red; color: white; border: none; padding: 5px 10px;">Sign Up</button>
+        </a>
+        <a href="/accounts/login" style="text-decoration: none; margin-left: 10px;">
+          <button style="background-color: red; color: white; border: none; padding: 5px 10px;">Login</button>
+        </a>
+      {% endif %}
+    </div>
+  </div>
+</nav>
