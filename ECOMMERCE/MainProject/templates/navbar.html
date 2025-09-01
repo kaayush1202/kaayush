@@ -10,18 +10,19 @@
     <ul style="list-style: none; display: flex; margin: 0; padding: 0;">
       <li style="margin: 0 15px;"><a href="/" style="color: #fff; text-decoration: none;">HOME</a></li>
       <li style="margin: 0 15px;"><a href="{% url 'user_list' %}" style="color: #fff; text-decoration: none;">users</a></li>
-      <li style="margin: 0 15px;"><a href="#" style="color: #fff; text-decoration: none;">id</a></li>
       <li style="margin: 0 15px;"><a href="{% url 'product_list' %}" style="color: #fff; text-decoration: none;">Products</a></li>
+      <li style="margin: 0 15px;"><a href="{% url 'brand_list' %}" style="color: #fff; text-decoration: none;">brands</a></li>
     
       {% if request.user.is_authenticated and request.user.user_type == "Supplier" %}
       <li style="margin: 0 15px;"><a href="{% url 'create_product' %}" style="color: #fff; text-decoration: none;">Create Product</a></li>
+      <li style="margin: 0 15px;"><a href="{% url 'create_brand' %}" style="color: #fff; text-decoration: none;">Brand_create</a></li>
+      <li style="margin: 0 15px;"><a href="{% url 'create_category' %}" style="color: #fff; text-decoration: none;">category_create</a></li>
       {% endif %}
       {% if request.user.is_authenticated and request.user.user_type == "Customer" %}
       <li style="margin: 0 15px;"><a href="{% url 'show_address' %}" style="color: #fff; text-decoration: none;">address</a></li>
       <li style="margin: 0 15px;"><a href="{% url 'add_address' %}" style="color: #fff; text-decoration: none;">add_address</a></li>
       {% endif %}
       
-      <li style="margin: 0 15px;"><a href="#" style="color: #fff; text-decoration: none;">CONTACT</a></li>
     </ul>
     <!-- Search and Cart -->
     <div style="display: flex; align-items: center;">

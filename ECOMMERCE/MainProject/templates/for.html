@@ -1,10 +1,53 @@
 {% extends "bootstrap.html" %}
+
 {% block main %}
-<ul>
-Lorem ipsum dolor sit, amet consectetur adipisicing elit. Fugiat quae enim consectetur excepturi sint tempore odio corrupti perspiciatis eius, nisi, in, impedit quisquam error expedita eos quas! Ullam ut fuga nesciunt inventore, nisi id harum ea maxime aperiam quasi possimus neque perferendis voluptas amet incidunt expedita praesentium magni doloribus consequatur modi quisquam esse nostrum veritatis! Fugiat maxime explicabo pariatur! Possimus in quidem provident blanditiis quo similique adipisci architecto, quos officiis exercitationem odio consequuntur veritatis deleniti nulla excepturi, soluta quaerat necessitatibus, maiores quae fuga voluptas cum reprehenderit labore. Autem illo nesciunt fuga atque perferendis voluptatum! Voluptatum a at ea esse non.
+<style>
+  .user-list {
+    list-style: none;
+    padding: 0;
+  }
+
+  .user-card {
+    background: #f8f9fa;
+    border-radius: 8px;
+    padding: 15px 20px;
+    margin-bottom: 10px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .user-card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+    background-color: #e9ecef;
+  }
+
+  .user-card a {
+    text-decoration: none;
+    color: #007bff;
+    font-weight: bold;
+    transition: color 0.3s ease;
+  }
+
+  .user-card a:hover {
+    color: #0056b3;
+  }
+</style>
+
+<div class="container mt-4">
+  <h2 class="mb-4">User List</h2>
+  <ul class="user-list">
     {% for user in users %}
-    <li>{{ user.username }}</li>
-    <a href="{% url 'user_id' user.id %}">details</a>
+      <li class="user-card">
+        <span>{{ user.username }}</span>
+        <a href="{% url 'user_id' user.id %}">Details</a>
+      </li>
+    {% empty %}
+      <li class="text-muted">No users found.</li>
     {% endfor %}
-</ul>
-{% endblock main %}
+  </ul>
+</div>
+{% endblock %}
