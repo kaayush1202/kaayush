@@ -29,10 +29,16 @@ class Category(models.Model):
         return " -> ".join(reversed(names))
 
 class Product(TimestampedModel):
+    product_CHOICE = [
+    ('all','All'),
+    ('Featured','Featured'),
+    ('special','special'),
+]
     image=models.ImageField(upload_to='images/product/')
     brand = models.ForeignKey(Brand,on_delete=models.CASCADE)
     category = models.ManyToManyField(Category,through="ProductCategory")
     product_name=models.CharField(max_length=20,blank=None)
+    product_des=models.CharField(max_length=10,choices=product_CHOICE,default='all')
     price = models.DecimalField(max_digits=12,decimal_places=2)
     def __str__(self):
         return self.brand.__str__() + " "+str(self.item )+ " of ₹"+str(self.price)

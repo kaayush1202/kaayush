@@ -1,0 +1,108 @@
+{% extends "bootstrap.html" %}
+
+{% block main %}
+<div class="container mt-5">
+  <div class="row justify-content-center">
+    <div class="col-md-6">
+      <div class="card edit-card shadow-lg border-0 rounded-4">
+        <div class="card-body p-4">
+          <!-- Title with animation -->
+          <h3 class="mb-4 text-center text-gradient fade-in">
+            <i class="bi bi-pencil-square me-2"></i>Edit Profile
+          </h3>
+
+          <!-- Edit Profile Form -->
+          <form method="POST" class="fade-up">
+            {% csrf_token %}
+            <div class="form-animate">
+              {{ form.as_p }}
+            </div>
+            <div class="d-flex justify-content-between mt-4">
+              <button type="submit" class="btn btn-primary btn-animate">
+                <i class="bi bi-save me-1"></i> Save Changes
+              </button>
+              <a href="{% url 'profile_page' user.id %}" class="btn btn-outline-secondary btn-animate">
+                <i class="bi bi-x-circle me-1"></i> Cancel
+              </a>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Bootstrap Icons -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
+
+<style>
+/* Card entrance animation */
+.edit-card {
+  animation: fadeUp 1s ease-in-out;
+  background: linear-gradient(135deg, #f9f9f9, #ffffff);
+  border: 2px solid #e9ecef;
+}
+
+/* Gradient title text */
+.text-gradient {
+  background: linear-gradient(90deg, #0d6efd, #6610f2);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  font-weight: bold;
+}
+
+/* Smooth fade-in */
+.fade-in {
+  animation: fadeIn 1.5s ease-in;
+}
+
+/* Form fade-up */
+.fade-up {
+  animation: slideUp 1s ease-in-out;
+}
+
+/* Animate form fields */
+.form-animate input,
+.form-animate select,
+.form-animate textarea {
+  transition: all 0.3s ease;
+  border-radius: 8px;
+}
+
+.form-animate input:focus,
+.form-animate select:focus,
+.form-animate textarea:focus {
+  transform: scale(1.02);
+  box-shadow: 0 0 10px rgba(13, 110, 253, 0.4);
+  border-color: #0d6efd;
+}
+
+/* Buttons animation */
+.btn-animate {
+  transition: all 0.3s ease-in-out;
+  border-radius: 10px;
+  font-weight: 500;
+}
+
+.btn-animate:hover {
+  transform: translateY(-3px) scale(1.05);
+  box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+}
+
+/* Keyframes */
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(30px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes slideUp {
+  from { transform: translateY(40px); opacity: 0; }
+  to { transform: translateY(0); opacity: 1; }
+}
+</style>
+{% endblock %}

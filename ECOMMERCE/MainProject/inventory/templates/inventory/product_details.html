@@ -2,14 +2,133 @@
 
 {% block main %}
 
-<div>
-    <div>
-        <p>{{product.product_name}}</p>
-    </div>
-</div>
-<a href="{% url 'update_product' product.id %}" class="btn btn-warning">Update</a>
-<a href="{% url 'delete_product' product.id %}" class="btn btn-danger">Delete</a>
-<a href="{% url 'add_to_cart' product.id %}" class="btn btn-danger">add to cart</a>
+<style>
+    body {
+        margin: 0;
+        padding: 0;
+        background: linear-gradient(135deg, #4c6ef5, #15aabf, #12b886);
+        background-size: 300% 300%;
+        animation: gradientMove 9s ease infinite;
+        font-family: 'Poppins', sans-serif;
+    }
 
+    @keyframes gradientMove {
+        0% { background-position: 0% 50%; }
+        50% { background-position: 100% 50%; }
+        100% { background-position: 0% 50%; }
+    }
+
+    .page-wrapper {
+        width: 100%;
+        min-height: 100vh;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 30px;
+    }
+
+    .product-card {
+        width: 90%;
+        max-width: 900px;
+        background: rgba(255, 255, 255, 0.15);
+        border-radius: 25px;
+        padding: 40px;
+        backdrop-filter: blur(15px);
+        box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+        display: flex;
+        gap: 40px;
+        align-items: center;
+        animation: fadeIn 1s ease;
+        color: #fff;
+    }
+
+    @keyframes fadeIn {
+        from { opacity: 0; transform: translateY(20px); }
+        to   { opacity: 1; transform: translateY(0); }
+    }
+
+    .product-image {
+        width: 45%;
+        height: 380px;
+        object-fit: cover;
+        border-radius: 20px;
+        box-shadow: 0 4px 15px rgba(0,0,0,0.4);
+    }
+
+    .product-info {
+        width: 55%;
+    }
+
+    .product-info h1 {
+        font-size: 36px;
+        margin-bottom: 15px;
+        font-weight: 700;
+    }
+
+    .product-info h2 {
+        font-size: 28px;
+        font-weight: 600;
+        color: #d4f7d4;
+        margin-bottom: 20px;
+    }
+
+    .action-buttons a {
+        margin: 8px 5px;
+        padding: 12px 25px;
+        border-radius: 10px;
+        font-size: 18px;
+        font-weight: 600;
+    }
+
+    .btn-warning { background: #ffcc00 !important; color: #000; }
+    .btn-warning:hover { background: #ffdd33 !important; }
+
+    .btn-danger { background: #ff4d4d !important; }
+    .btn-danger:hover { background: #ff6666 !important; }
+
+    .btn-primary { background: #007bff !important; }
+    .btn-primary:hover { background: #3399ff !important; }
+
+    @media (max-width: 768px) {
+        .product-card {
+            flex-direction: column;
+            text-align: center;
+        }
+        .product-image {
+            width: 100%;
+            height: 300px;
+        }
+        .product-info {
+            width: 100%;
+        }
+    }
+</style>
+
+
+<div class="page-wrapper">
+
+    <div class="product-card">
+
+        {% if product.image %}
+            <img src="{{ product.image.url }}" class="product-image" alt="{{ product.product_name }}">
+        {% else %}
+            <p>No Image Available</p>
+        {% endif %}
+
+        <div class="product-info">
+            <h1>{{ product.product_name }}</h1>
+
+            <h2>Price: ₹{{ product.price }}</h2>
+
+            <div class="action-buttons">
+                <a href="{% url 'update_product' product.id %}" class="btn btn-warning">Update</a>
+                <a href="{% url 'delete_product' product.id %}" class="btn btn-danger">Delete</a>
+                <a href="{% url 'add_to_cart' product.id %}" class="btn btn-primary">Add to Cart</a>
+            </div>
+        </div>
+
+    </div>
+
+</div>
 
 {% endblock %}

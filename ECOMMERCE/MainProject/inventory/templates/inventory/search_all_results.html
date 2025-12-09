@@ -1,0 +1,125 @@
+{% extends "bootstrap.html" %}
+
+{% block main%}
+
+<style>
+    body {
+        margin: 0;
+        padding: 0;
+        background: linear-gradient(135deg, #4c6ef5, #15aabf, #12b886);
+        background-size: 300% 300%;
+        animation: gradientBG 9s ease infinite;
+        font-family: "Poppins", sans-serif;
+    }
+
+    @keyframes gradientBG {
+        0% { background-position: 0% 50%; }
+        50% { background-position: 100% 50%; }
+        100% { background-position: 0% 50%; }
+    }
+
+    .search-wrapper {
+        min-height: 100vh;
+        padding: 40px 0;
+        display: flex;
+        justify-content: center;
+    }
+
+    .search-box {
+        background: rgba(255, 255, 255, 0.15);
+        width: 90%;
+        max-width: 900px;
+        padding: 40px;
+        border-radius: 25px;
+        backdrop-filter: blur(15px);
+        color: #fff;
+        animation: fadeIn 1s ease;
+        box-shadow: 0 8px 25px rgba(0,0,0,0.2);
+    }
+
+    @keyframes fadeIn {
+        from { opacity: 0; transform: translateY(25px); }
+        to   { opacity: 1; transform: translateY(0); }
+    }
+
+    h3 {
+        font-weight: 700;
+        font-size: 32px;
+    }
+
+    h4 {
+        margin-top: 25px;
+        font-size: 26px;
+        font-weight: 600;
+        text-decoration: underline;
+    }
+
+    ul {
+        list-style: none;
+        padding-left: 0;
+    }
+
+    ul li {
+        background: rgba(255, 255, 255, 0.25);
+        margin-bottom: 10px;
+        padding: 12px 15px;
+        border-radius: 12px;
+        backdrop-filter: blur(10px);
+        font-size: 18px;
+        transition: 0.25s;
+    }
+
+    ul li:hover {
+        background: rgba(255, 255, 255, 0.35);
+        transform: translateX(5px);
+    }
+
+    .alert {
+        border-radius: 12px;
+        font-size: 18px;
+    }
+</style>
+<div class="search-wrapper">
+    <div class="search-box">
+
+        <h3>Search Results for "<span style="color:#ffe066;">{{ query }}</span>"</h3>
+        <hr style="border-color:white;">
+
+        {% if no_results %}
+            <div class="alert alert-warning mt-3">
+                <b>No matched items found for "<strong>{{ query }}</strong>"</b>.
+            </div>
+        {% else %}
+
+            {% if product_results %}
+                <h4>Products</h4>
+                <ul>
+                    {% for product in product_results %}
+                        <li>{{ product.product_name }} — ₹{{ product.price }}</li>
+                    {% endfor %}
+                </ul>
+            {% endif %}
+
+            {% if brand_results %}
+                <h4>Brands</h4>
+                <ul>
+                    {% for brand in brand_results %}
+                        <li>{{ brand.name }}</li>
+                    {% endfor %}
+                </ul>
+            {% endif %}
+
+            {% if category_results %}
+                <h4>Categories</h4>
+                <ul>
+                    {% for category in category_results %}
+                        <li>{{ category.name }}</li>
+                    {% endfor %}
+                </ul>
+            {% endif %}
+
+        {% endif %}
+    </div>
+</div>
+
+{% endblock %}

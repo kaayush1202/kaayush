@@ -1,5 +1,85 @@
 {% extends 'bootstrap.html' %}
 {% block main %}
+<style>
+  /* General Layout */
+  body {
+    background-color: #f0f4f8;
+  }
+
+  .container {
+    max-width: 600px;
+  }
+
+  .card {
+    border: none;
+    background-color: #ffffff;
+    transition: box-shadow 0.3s ease;
+  }
+
+  .card:hover {
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+  }
+
+  /* Form Fields */
+  .form-control {
+    border-radius: 8px;
+    padding: 12px;
+    border: 1px solid #ced4da;
+    transition: border-color 0.2s, box-shadow 0.2s;
+  }
+
+  .form-control:focus {
+    border-color: #007bff;
+    box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25);
+  }
+
+  /* Labels */
+  .form-label {
+    font-weight: 600;
+    color: #333;
+  }
+
+  /* Submit Button */
+  .btn-primary {
+    background-color: #007bff;
+    border: none;
+    font-weight: bold;
+    border-radius: 8px;
+  }
+
+  .btn-primary:hover {
+    background-color: #0056b3;
+  }
+
+  /* Error Message */
+  .text-danger {
+    font-size: 0.875rem;
+    margin-top: 5px;
+  }
+
+  /* Help Text */
+  .form-text {
+    color: #6c757d;
+    font-size: 0.85rem;
+  }
+
+  /* OTP-specific styling (if inputs are split) */
+  .otp-input {
+    width: 50px;
+    text-align: center;
+    font-size: 1.5rem;
+    margin: 0 5px;
+  }
+
+  @media (max-width: 576px) {
+    .otp-input {
+      width: 40px;
+      font-size: 1.2rem;
+      margin: 0 3px;
+    }
+  }
+</style>
+
 
 <div class="container mt-5 bg-primary p-5 rounded">
   <div class="card shadow-sm rounded-4 p-4">
@@ -29,7 +109,10 @@
         {% endif %}
       </div>
       {% endfor %}
+      <select name="" id="">
 
+        <option value=""></option>
+      </select>
       <div class="text-center">
         <button type="submit" class="btn btn-primary px-4 py-2">Submit</button>
       </div>

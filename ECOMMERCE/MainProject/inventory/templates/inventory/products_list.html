@@ -2,22 +2,26 @@
   {% for product in products %}
     <div class="col">
       <div class="card h-100 shadow-sm border-0 rounded-4 overflow-hidden">
-        <div style="height: 200px; overflow: hidden;">
-          <img 
-            src="{{ product.image.url }}" 
-            class="card-img-top img-fluid object-fit-cover w-100 h-100" 
-            alt="{{ product.product_name }}"
-            style="object-fit: cover;"
-          />
-        </div>
+
+        <!-- FULL IMAGE (NO CROP) -->
+        <img 
+          src="{{ product.image.url }}" 
+          class="card-img-top img-fluid" 
+          alt="{{ product.product_name }}"
+          style="width: 100%; height: auto; object-fit: contain; background: #f8f9fa;"
+        />
+
         <div class="card-body text-center">
           <h5 class="card-title fw-bold mb-1">{{ product.product_name }}</h5>
           <p class="card-text text-muted mb-1">Brand: {{ product.brand.name }}</p>
           <p class="card-text text-danger fw-semibold mb-3">Price: ₹{{ product.price }}</p>
-          <a href="{% url 'product_details' product.id %}" class="btn btn-outline-primary rounded-pill px-4">
+
+          <a href="{% url 'product_details' product.id %}" 
+             class="btn btn-outline-primary rounded-pill px-4">
             View Details
           </a>
         </div>
+
       </div>
     </div>
   {% empty %}

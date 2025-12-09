@@ -89,3 +89,43 @@ def create_category(request):
             return render(request,'inventory/category_c.html',{'form':form})
     else:
         return render(request,'inventory/category_c.html',{'form':form})
+    
+
+from django.db.models import Q
+from django.shortcuts import render
+from .models import Product, Brand, Category
+
+def search_all(request):
+    query = request.GET.get('q', '').strip()
+
+    product_results = []
+    brand_results = []
+    category_results = []
+    no_results = False
+
+    if query:
+        words = query.split()  # split into multiple words
+
+        q_objects = Q()
+        for word in words:
+            q_objects |= Q(product_name__icontains=word)
+            q_objects |= Q(product_des__icontains=word)
+            q_objects |= Q(brand__name__icontains=word)
+            q_objects |= Q(category__name__icontains=word)
+
+        product_results = Product.objects.filter(q_objects).distinct()
+        brand_results = Brand.objects.filter(name__icontains=query).distinct()
+        category_results = Category.objects.filter(name__icontains=query).distinct()
+
+        if not product_results and not brand_results and not category_results:
+            no_results = True
+
+    context = {
+        'query': query,
+        'product_results': product_results,
+        'brand_results': brand_results,
+        'category_results': category_results,
+        'no_results': no_results,
+    }
+
+    return render(request, "inventory/search_all_results.html", context)

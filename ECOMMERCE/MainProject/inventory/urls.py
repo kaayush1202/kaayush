@@ -10,4 +10,6 @@ urlpatterns =[
     path('product/update/<int:id>/',update_product,name="update_product"),
     path('product/delete/<int:id>/',delete_product,name="delete_product"),
     path('product/details/<int:pk>/',product_details,name="product_details"),
+    path('search/',search_all, name='search_products'),
+    
 ]

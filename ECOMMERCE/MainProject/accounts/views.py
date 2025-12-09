@@ -48,21 +48,21 @@ def email_verify(request):
             return render(request,"email_verify.html")
     else:
         return redirect('/')
-def user_list(request):
-    users = User.objects.all()
-    context = {
-        'users':users
-    }
-    return render(request,'for.html',context)
-def user_details(request,id):
-    user = get_object_or_404(User,id=id)
+# def user_list(request):
+#     users = User.objects.all()
+#     context = {
+#         'users':users
+#     }
+#     return render(request,'for.html',context)
+# def user_details(request,id):
+#     user = get_object_or_404(User,id=id)
     
-    user=Order.objects.filter(user=user).first()
-    print(user)
-    context = {
-        'user':user 
-    }
-    return render(request,'id.html',context)
+#     user=Order.objects.filter(user=user).first()
+#     print(user)
+#     context = {
+#         'user':user 
+#     }
+#     return render(request,'id.html',context)
 
 from django.contrib.auth import login,authenticate,logout
 from .forms import LoginForm
@@ -110,3 +110,31 @@ def show_address(request):
         'addresses': addresses
     }
     return render(request, 'show_address.html', context)
+@login_required
+def profilepage(request,pk):
+    user=User.objects.get(id=pk)
+    context={
+        'user':user
+    }
+    return render(request,'profilepage.html',context)
+
+from .forms import edit_profile_form
+@login_required
+def edit_profile(request,pk):
+    user=get_object_or_404(User,id=pk)
+    if request.user != user:
+        return redirect('profile_page', pk=user.id)
+
+    if request.method == 'POST':
+        form = edit_profile_form(request.POST,request.FILES, instance=user)
+        if form.is_valid():
+            form.save()
+            return redirect('profile_page', pk=user.id)
+    else:
+        form = edit_profile_form(instance=user)
+
+    context = {
+        'form': form,
+        'user': user
+    }
+    return render(request, 'edit_profile.html', context)

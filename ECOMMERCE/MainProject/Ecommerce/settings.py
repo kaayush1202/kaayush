@@ -37,6 +37,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    #MANUALLY
     'accounts',
     'order',
     'orderdetail',
@@ -59,8 +60,8 @@ ROOT_URLCONF = 'Ecommerce.urls'
 
 TEMPLATES = [
     {
-        'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [BASE_DIR/'templates'],
+        'BACKEND': 'django.template.backends.django.DjangoTemplates', #MANUALLY
+        'DIRS': [BASE_DIR/'templates'],#MANUALLY
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -77,7 +78,7 @@ WSGI_APPLICATION = 'Ecommerce.wsgi.application'
 
 # Database
 # https://docs.djangoproject.com/en/5.2/ref/settings/#databases
-
+# MANUALLY
 RAZORPAY_KEY_ID='rzp_test_R5AOUsmTk6YiHE'
 RAZORPAY_KEY_SECRET='iZ3zgCrnhBAiFtUfok8WVvrv'
 DATABASES = {
@@ -129,6 +130,8 @@ USE_TZ = True
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.2/ref/settings/#default-auto-field
 
+
+# MANUALLY
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 AUTH_USER_MODEL = "accounts.User"
 STATIC_URL = 'static/'

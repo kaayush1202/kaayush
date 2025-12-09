@@ -9,7 +9,7 @@ GENDER_CHOICE = [
 class User(AbstractUser):
     gender = models.CharField(max_length=1,choices=GENDER_CHOICE)
     verified = models.BooleanField(default=False)
-    user_type = models.CharField(max_length=8,choices=(['Customer',"Customer"],['Supplier','Supplier']))
+    user_type = models.CharField(max_length=8,choices=(['Customer',"Customer"],['Supplier','Supplier'],['Admin','Admin']))
 
 
 class Address(models.Model):
